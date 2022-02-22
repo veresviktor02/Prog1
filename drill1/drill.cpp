@@ -29,24 +29,12 @@ int main()
         win.attach(uj);
     }
 
-    /*
-    for(int i = 0; i < xmax/width+1; i++) //hányszor fut le a for ciklus (vízszintesen)
+    //függőleges vonalak
+    for(int i = 0; i < ymax/width+1; i++)
     {
-        for(int j = 0; j < ymax/height+1; j++) //hányszor fut le a for ciklus (függőlegesen)
-        {
-            valami.add(Point{width*i,height*j}, Point{width*i+100,height*j}); //két pontot köt össze
-            win.attach(valami);
-        }
-    }
-    */
-
-    //függőleges vonalak ... in process
-    for(int i = 0; i < ymax/height+1; i++)
-    {
-        uj.add(Point{1,height*i}, Point{xmax-1,height*i});
+        uj.add(Point{width*i, 1}, Point{width*i,ymax-1});
         win.attach(uj);
     }
-
 
     win.wait_for_button();
 }
