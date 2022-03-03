@@ -1,1 +1,0 @@
-/home/veresviktor02/Asztal/elsoora/drillproba.cpp
