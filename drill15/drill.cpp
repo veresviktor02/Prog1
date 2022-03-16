@@ -1,16 +1,90 @@
-//???
+#include "Simple_window.h"
 #include "Graph.h"
-#include "Window.h"
 
 /*
-g++ drill.cpp Graph.cpp Window.cpp -o ./drill `fltk-config --ldflags --use-images` -std=c++11
+    g++ drill.cpp Graph.cpp Simple_window.cpp -o ./drill `fltk-config --ldflags --use-images` -std=c++11
 */
+
+double one(double x)
+{
+    return 1;
+}
+
+double slope(double x)
+{
+    return x / 2;
+}
+
+double square(double x)
+{
+    return x * x;
+}
+
+double slope_cos(double x)
+{
+    return cos(x) + slope(x);
+}
 
 int main()
 {
     using namespace Graph_lib;
 
-    Window win {Point{100,100}, 600, 600, "Function graphs"};
+    int x_point = 100;
+    int y_point = 100;
+
+    int x_max = 600;
+    int y_max = 600;
+
+    Simple_window win {Point{x_point,y_point}, x_max, y_max, "Function graphs"};
+
+    int x_origo = x_max / 2;
+    int y_origo = y_max / 2;
+
+    Point origo{x_origo, y_origo};
+
+    int axis_length = 400;
+    int notch = 20;
+
+    Axis x_axis (Axis::Orientation::x, Point{100, y_origo}, axis_length, axis_length / notch, "1 == 20 pixels");
+    Axis y_axis (Axis::Orientation::y, Point{x_origo, 500}, axis_length, axis_length / notch, "1 == 20 pixels");
+
+    x_axis.set_color(Color::red);
+    y_axis.set_color(Color::red);
+
+    int range_min = -10;
+    int range_max = 11;
+
+    int points = 400;
+
+    int x_scale = 20;
+    int y_scale = 20;
+
+    Function function_one(one, range_min, range_max, origo, points, x_scale, y_scale);
+
+    Function function_slope(slope, range_min, range_max, origo, points, x_scale, y_scale);
+
+    int pos = range_min;
+
+    Text slope_label(Point(abs(origo.x + (x_scale * pos)), origo.y - ((slope(pos)+ 1) * y_scale)), "x/2");
+
+    Function function_square(square, range_min, range_max, origo, points, x_scale, y_scale);
+
+    Function function_cos(cos, range_min, range_max, origo, points, x_scale, y_scale);
+
+    function_cos.set_color(Color::blue);
+
+    Function function_slope_cos(slope_cos, range_min, range_max, origo, points, x_scale, y_scale);
+
+    win.attach(x_axis);
+    win.attach(y_axis);
+    win.attach(function_one);
+    win.attach(function_slope);
+    win.attach(function_square);
+    win.attach(function_cos);
+    win.attach(function_slope_cos);
+    
+
+    win.wait_for_button();
 }
 /*
 Function graphing drill:
