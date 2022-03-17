@@ -20,7 +20,7 @@ double square(double x)
     return x * x;
 }
 
-double slope_cos(double x)
+double sloping_cos(double x)
 {
     return cos(x) + slope(x);
 }
@@ -73,7 +73,7 @@ int main()
 
     function_cos.set_color(Color::blue);
 
-    Function function_slope_cos(slope_cos, range_min, range_max, origo, points, x_scale, y_scale);
+    Function function_sloping_cos(sloping_cos, range_min, range_max, origo, points, x_scale, y_scale);
 
     win.attach(x_axis);
     win.attach(y_axis);
@@ -81,7 +81,7 @@ int main()
     win.attach(function_slope);
     win.attach(function_square);
     win.attach(function_cos);
-    win.attach(function_slope_cos);
+    win.attach(function_sloping_cos);
     
 
     win.wait_for_button();
@@ -106,19 +106,4 @@ and no scaling (in the window).
 7. Add a cosine to the window (don’t write a new function).
 8. Make the cosine blue.
 9. Write a function sloping_cos() that adds a cosine to slope() (as defined above) and add it to the window.
-Class definition drill:
-1. Define a struct Person containing a string name and an int age.
-2. Define a variable of type Person, initialize it with “Goofy” and 63, and write it to the screen (cout).
-3. Define an input (>>) and an output (<<) operator for Person; read in a Person from the keyboard (cin)
-and write it out to the screen (cout).
-4. Give Person a constructor initializing name and age.
-5. Make the representation of Person private, and provide const member functions name()
-and age() to read the name and age.
-6. Modify >> and << to work with the redefined Person.7. Modify the constructor to check that age is [0:150) 
-and that name doesn’t contain any of the characters ; : " ' [ ] * & ^
-% $ # @ !. Use error() in case of error. Test.
-8. Read a sequence of Persons from input (cin) into a vector<Person>; write them out again to the screen (cout). Test
-with correct and erroneous input.
-9. Change the representation of Person to have first_name and second_name instead of name.
-Make it an error not to supply both a first and a second name. Be sure to fix >> and << also. Test.
 */
