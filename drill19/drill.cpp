@@ -2,42 +2,109 @@
 
 template<typename T> struct S
 {
-    T val;
+    public:
+        S() : val(T()) {}
+        S(T type) { val = type; }
 
-    T& operator[](int n) {return val; }
-    T& operator[](char n) {return val; }
-    T& operator[](double n) {return val; }
-    T& operator[](string n) {return val; }
+        void operator= (const T&);
+
+        void read_val(T& v);
+
+        T& get();
+        const T& get() const;
+
+        void set(const T& vv);
+
+    private:
+        T val;
+};
+
+template<typename T> T& S<T>::get()
+{
+    return val;
+};
+
+template<typename T> const T& S<T>::get() const
+{
+    return val;
+};
+
+template<typename T> void S<T>::set(const T& vv)
+{
+    val = vv;
+};
+
+template<typename T> void S<T>::operator=(const T& type)
+{
+    val = type;
+};
+
+template<typename T> void read_val(T& v)
+{
+    cin >> v;
 };
 
 int main()
 {
     
     S<int> s_int(3);
-    S<char> s_char('b');
-    S<double> s_double(4.2); 
+    S<char> s_char('a');
+    S<double> s_double(6.9); 
     S<string> s_string("alma");
-    S<vector<int>>;
+
+    vector<int> my_vector;
+    
+    for(int i = 0; i < 5; i++)
+    {
+        my_vector.push_back(i * 2);
+    }
+
+    S<vector<int>> s_vectorint();
+
+    cout << s_int.get() << '\n';
+    cout << s_char.get() << '\n'; 
+    cout << s_double.get() << '\n'; 
+    cout << s_string.get() << '\n';
+
+    for(int i = 0; i < 5; i++)
+    {
+        cout << my_vector[i] << ' ';
+    }
+    cout << '\n';
+
+    cout << "Changing values..." << '\n';
+        
+    s_int = 4;
+    s_char = 'b';
+    s_double = 4.20;
+    s_string = "reszelt alma";
+
+    cout << s_int.get() << '\n';
+    cout << s_char.get() << '\n'; 
+    cout << s_double.get() << '\n'; 
+    cout << s_string.get() << '\n';
+
+
+    int s_int_2;
+	char s_char_2;
+	double s_double_2;
+	string s_string_2;
+
+    cout << "Adj meg új értékeket! (int, char, double string)\n";
+
+	read_val(s_int_2);
+	s_int.set(s_int_2);
+	read_val(s_char_2);
+	s_char.set(s_char_2);
+	read_val(s_double_2);
+	s_double.set(s_double_2);
+	read_val(s_string_2);
+	s_string.set(s_string_2);
+
+	cout << s_int.get() << '\n';
+    cout << s_char.get() << '\n'; 
+    cout << s_double.get() << '\n'; 
+    cout << s_string.get() << '\n';
     
     return 0;
 }
-
-/*
-    1. Define template<typename T> struct S { T val; };.
-2. Add a constructor, so that you can initialize with a T.
-3. Define variables of types S<int>, S<char>, S<double>, S<string>, and S<vector<int>>; initialize them with
-values of your choice.
-4. Read those values and print them.
-5. Add a function template get() that returns a reference to val.
-6. Put the definition of get() outside the class.
-7. Make val private.
-8. Do 4 again using get().
-9. Add a set() function template so that you can change val.
-10. Replace set() with an S<T>::operator=(const T&). Hint: Much simpler than §19.2.5.
-11. Provide const and non-const versions of get().
-12. Define a function template<typename T> read_val(T& v) that reads from cin into v.
-13. Use read_val() to read into each of the variables from 3 except the S<vector<int>> variable.
-14. Bonus: Define input and output operators (>> and <<) for vector<T>s. For both input and output use a { val, val, val }
-format. That will allow read_val() to also handle the S<vector<int>> variable.
-Remember to test after each step.
-*/
