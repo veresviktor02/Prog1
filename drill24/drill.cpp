@@ -49,7 +49,7 @@ void my_sqrt()
 
 void my_matrix()
 {
-    Matrix<double> Neo(10);
+    Matrix<double, 1> Neo(10); //<'type' 'dimensions'>
     float number;
     for(int i = 0; i < 10; i++)
     {
@@ -66,15 +66,13 @@ void my_matrix()
     cout << '\n';
 }
 
-void my_complex() //nem ártana tesztelni ezt a fv-t!
+void my_complex()
 {
     Matrix<complex<double>> Neo(10);
-    complex<double> s;
     for(int i = 0; i < 10; i++)
     {
         cout << i+1 << ". komplex szám: ";
-        cin >> s;
-        Neo[i] = s;
+        cin >> Neo[i];
     }
 
     complex<double> sum = 0;
@@ -84,29 +82,40 @@ void my_complex() //nem ártana tesztelni ezt a fv-t!
         sum = sum + Neo[i];
     }
 
-    cout << "Sum of 'Matrix<complex<double>>' : " << sum << '\n';
+    cout << "Sum of 'Matrix<complex<double>>': " << sum << '\n';
 }
 
-void my_matrix2() //fix needed! for-t kell ágyazni for-ba, de már nincs idő az órán :(
+void my_matrix2()
+{
+    int n;
+    int m;
+    cout << "n és m értékei: "; cin >> n >> m;
+    Matrix<int,2> Neo(n,m);
+
+    for(int i = 0; i < Neo.dim1(); i++)
+    {
+        for(int j = 0; j < Neo.dim2(); j++)
+        {
+            Neo(i,j) = (i+1)*(j+2);
+        }
+    }
+    cout << Neo << '\n';
+}
+
+void my_matrix3()
 {
     Matrix<int, 2> m(2, 3);
-    int s;
-
     cout << "Adj meg 6 számot a mátrixnak:\n";
 
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 2; i++)
     {
-        cin >> s;
-        m[i] = s;
+        for(int j = 0; j < 3; j++)
+        {
+            cin >> m(i, j);
+        }
     }
 
-    for(int i = 0; i < 6; i++)
-    {
-        cout << m[i] << ' ';
-    }
-    cout << '\n';
-
-    //terminate called after throwing an instance of 'Numeric_lib::Matrix_error' Félbeszakítva (core készült)
+    cout << m << '\n';
 }
 
 int main()
@@ -120,6 +129,8 @@ int main()
     my_complex();
 
     my_matrix2();
+
+    my_matrix3();
 
     return 0;
 }
