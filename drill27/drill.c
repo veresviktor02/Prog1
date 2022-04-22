@@ -1,8 +1,8 @@
-#include "std_lib_facilities.h"
+#include <stdio.h>
 
 int main()
 {
-
+    printf("Hello, World!");
     
     return 0;
 }
