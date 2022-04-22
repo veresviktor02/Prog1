@@ -1,0 +1,6 @@
+alma 1 1.1
+körte 2 2.2
+banán 3 3.3
+eper 4 4.4
+ananász 5 5.5
+mangó 6 6.6
